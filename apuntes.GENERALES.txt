@@ -1,0 +1,237 @@
+viernes clases
+30/5
+13/6
+
+-----------------------------
+callback ---> función invocada por otra
+
+resultado que devuelve una función
+acción una vez sucede/termina otra 
+
+
+function cualquiera(){
+    return "hola";
+}
+
+function haceAlgoAsincrono(x){
+    //una vez la acción termina
+    x("hola")
+}
+
+
+haceAlgoAsincrono(resultado => {
+
+})
+
+promesa --> función asíncrona que produce un resultado --> new Promise(función*)
+
+* --> dos callbacks ---> fullfil (promesa cumplida) | reject (promesa rechazada)
+
+PROMESA 
+.then(callback fullfil)
+.catch(callback reject)
+
+
+async / await ---> permite esperar el valor(resultado) de una promesa
+
+
+try{
+    //acciones que pueden fallar
+}catch(error){//excepción
+    //si alguna acción falla, entramos al bloque CATCH 
+}
+
+-----------------------------
+
+fetch ----> conexiones/peticiones asíncronas a un servidor
+
+fetch(url, objeto de configuración opcional)
+
+--> retorna una promesa ---> respuesta del servidor 
+
+ respuesta del servidor --procesar--> string/string json --> text/json 
+
+ text/json  --> retornan promesas con la respuesta procesada
+
+ json --> javascript object notation
+ decodificar ---> JSON.parse 
+ codificar ---> JSON.stringify
+
+ ------------------------------------
+
+ cd --> change directory
+
+ cd ruta/destino
+
+ ls --> lista de ficheros/directorios del directorio actual
+
+ clear ----> limpiar consola
+
+ -----------------------------------------------------------------
+
+node ---> runtime de JS 
+
+runtime --> entorno de ejecución
+
+module ---> el fichero/script en ejecución 
+process --> proceso generado por el script en ejecución 
+
+
+-------------------
+importar un módulo --> require(nombre/ruta al módulo)
+
+express.static() ---> retorna un callback que permite buscar ficheros y servirlos en un directorio
+
+
+----------------------
+Gestionar la RESPUESTA:
+
+respuesta.send() --> genérica, HTML
+respuesta.json() --> json (hace solo el STRINGIFY())
+respuesta.redirect() --> redirecciones
+respuesta.render() --> html dinámico en base a plantillas
+respuesta.download() --> para enviar ficheros binarios a descargar
+
+
+    <form action="/agregar" method="POST">
+        <input type="text" name="nombre">
+        <input type="text" name="apellidos">
+        <input type="submit" value="agregar">
+    </form>
+
+
+    "nombre=xyz&apellidos=xyz" <----------------condificación como url
+    
+    El formulario con botón o input = submit, tienen por defecto 
+
+    POST
+    Content type ---> "application/x-www-form-urlencoded"
+
+    
+    express --> express.urlenconded ---> intercepta cualquier petición con Content-type "application/x-www-form-urlencoded" y la guarda como OBJETO en el objeto body de la petición
+
+    coge
+    
+    "nombre=xyz&apellidos=xyz"
+
+    y lo convierte automáticamente en
+
+    {
+        nombre : "xyz",
+        apellidos : "xyz"
+    }
+
+PREGUNTA: ¿entonces lo que hay  está codificado en express.urlenconded son todos los métodos anteriores de convertirlo en array sin & y hacer split dentro de cada elemento del array para luego guardarlo en un objeto que después retorna?
+
+express.url <--- ¿express es un super objeto con todas las funciones con método get?
+
+
+¿plantillas?
+
+
+
+en una estructura más compleja de proyecto: 
+wordpress
+
+wp-include ---> utilidades de programación (backend)
+wp-admin --> site de administración CMS
+wp-content 
+    theme
+        havier
+            css
+                x.css
+            js
+                x.js
+    uploads
+
+www.loquesea.com  
+
+
+----------------------------------------------
+
+
+
+sitio estático 
+----------------
+csr --> client side rendering /el contenido se presenta desde el cliente (navegador)
+ssr ---> server side renderign /la presentación del contenido se hace desde el servidor --php se ejecuta en el servidor
+
+----------------
+
+sistema de plantillas ---> html dinámico 
+
+JS --> ejs | pug 
+
+ejs ---> embeded JavaScript
+
+en muchos lenguajes de programación las plantillas se llama vistas
+
+templates ---> views(vistas) ----> respuesta.render(plantilla)
+
+
+respuesta.render("nombre_plantilla_sin_extension", objeto de datos* );
+
+* ---> estos datos estarán en scope dentro de la plantilla
+
+----------------------------------------------------------------
+etiquetas de plantilla en EJS: 
+
+<%- %>  -----> haz render de la variable, sin procesar el contenido
+<%= %>  -----> haz render de la variable, sanitizando el HTML = html se convierte en entidadas para que no tenga efecto
+
+        "<span>35</span>" --> sanitize --> "&lt;span&gt;35&lt;/span$gt"
+
+<% %>  ----> estructuras de control --> condicionales y bucles 
+
+
+REMATANDO EXPRESS Y FETCH
+-------------------------
+express_api
+
+respuesta ---> send | redirect | render 
+
+express.static ---> css/js/html estático
+
+api --> respuesta.json --> servimos datos ---> que consumiremos desde el front usando FETCH;
+
+
+fetch --> asíncronas --> CSR --> client side rendering
+
+
+---------------------------------
+
+GET /estudiantes
+
+POST /nuevo
+
+
+------
+unit test --> pruebas unitarias --> TDD
+
+
+07/05/2025 ---> explicacación del ejercicio ESTUDIANTES
+
+
+
+.querySelectorAll(".hola) --> node list --> estática
+.getElementByClassName("hola") --> html collection --> dinámica
+
+---------------------------------
+
+/ --> directorio raiz 
+
+
+
+sistema 24/7
+
+render --> plataforma como servicio --> PaaS : proveedor de hosting en la nube que me deja alojar ahí mi site y que funcione 24/7
+
+devops --> configuran cómo se va a hacer el despliegue del servidor en la nube  --> IaaS
+
+render YA NOS DA el servidor ---> nginx --> puerto HTTPS (la url a la que apunta el site)
+
+PROVEEDOR GIT 
+github / gitlab / bit bucket / azure
+
+
+
